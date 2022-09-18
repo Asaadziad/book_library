@@ -7,8 +7,19 @@ function book(title, author, pages, read) {
   this.read = read;
 }
 
-book.prototype.info = function () {
-  return this.title;
-};
+function addBookToLibrary() {
+  let bTitle = document.getElementById("title").value;
+  let bAuthor = document.getElementById("author").value;
+  let bPages = document.getElementById("pages").value;
+  let bRead = document.getElementById("read").value;
+  myLibrary += [bTitle, bAuthor, bPages, bRead];
+}
 
-function addBookToLibrary() {}
+function addBook() {
+  document.getElementById("form-library-container").style.display = "flex";
+}
+const closeBtn = document.getElementsByClassName("closeBtn")[0];
+
+closeBtn.onclick = function () {
+  document.getElementById("form-library-container").style.display = "none";
+};
