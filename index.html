@@ -10,20 +10,23 @@
     <div id="addBtn" class="addBtn">
         <button onclick="addBook()"><i class="fa fa-plus"></i></button>
     </div>
+    <!-- Modal -->
     <div id="form-library-container">
         
         <form id="form-library">
-            <span class="closeBtn">&times;</span>
+            <span id="closeBtn">&times;</span>
             <label for="title" id="title-label">Title:</label>
-            <input type="text" id="title" placeholder="Harry Potter and the half-blood prince">
+            <input type="text" id="title" placeholder="Harry Potter and the half-blood prince" required>
             <label for="author" id="author-label">Author:</label>
-            <input type="text" id="author" placeholder="J.K. Rowling">
+            <input type="text" id="author" placeholder="J.K. Rowling" required>
             <label for="pages" id="pages-label">Pages:</label>
             <input type="text" id="pages" placeholder="607"><br>
-            <label for="read" id="read-label">Read: <input type="radio" id="read" value="Yes"> </label>
+            <label for="read" id="read-label">Read: <input type="checkbox" id="read" value="Yes"> </label>
             <div class="vertical-center"><button id="add">Add +</button></div>
         </form>
     </div>
+    <!-- End of Modal -->
+    <div id="result"></div>
     <script src="script.js"></script>
   </body>
 </html>
