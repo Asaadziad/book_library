@@ -26,36 +26,75 @@ closeBtn.addEventListener("click", function () {
 function addBookToLibrary() {
   event.preventDefault();
   document.getElementById("form-library-container").style.display = "none";
-  const bTitle = document.getElementById("title").value;
-  const bAuthor = document.getElementById("author").value;
-  const bPages = document.getElementById("pages").value;
-  const bRead = document.getElementById("read").value;
-  const bAdd = new book(bTitle, bAuthor, bPages, bRead);
+  const bTitle = document.getElementById("title");
+  const bAuthor = document.getElementById("author");
+  const bPages = document.getElementById("pages");
+  const bRead = document.getElementById("read");
+  let isRead = false;
+  if (bRead.checked) {
+    isRead = true;
+  }
+  const bAdd = new book(bTitle.value, bAuthor.value, bPages.value, isRead);
   myLibrary.push(bAdd);
-  createBookDOM(bAdd);
+  bTitle.value = "";
+  bAuthor.value = "";
+  bPages.value = "";
+  bRead.checked = false;
+  createAll();
 }
 
-function createBookDOM(book) {
+function createAll() {
+  document.getElementById("result").innerHTML = "";
+  for (let i = 0; i < myLibrary.length; i++) {
+    createBookDOM(myLibrary[i]);
+  }
+}
+
+function createBookDOM(book, index) {
   const newBook = document.createElement("div");
   const newBookTitle = document.createElement("div");
   const newBookAuthor = document.createElement("div");
   const newBookPages = document.createElement("div");
   const newBookRead = document.createElement("div");
+  const info = document.createElement("div");
+  const title = document.createElement("h1");
+  const author = document.createElement("h2");
   const trash = document.createElement("i");
-  const edit = document.createElement("i");
   trash.setAttribute("class", "fa fa-trash");
   trash.setAttribute("id", "trashCan");
-  edit.setAttribute("class", "fa fa-pencil-square-o");
-  edit.setAttribute("id", "pencil");
   newBook.setAttribute("id", "bookCard");
-  newBookTitle.setAttribute("id", "header");
+  newBook.setAttribute("cellIndex", index);
+  info.setAttribute("id", "cardInfo");
   newBookRead.setAttribute("id", "footer");
-  newBookTitle.textContent += book.title;
-  newBookTitle.appendChild(trash);
-  newBookTitle.appendChild(edit);
-  newBookRead.textContent += book.Read;
-  newBook.appendChild(newBookTitle);
+  title.textContent += book.title;
+  author.textContent += book.author;
+  info.appendChild(title);
+  info.appendChild(author);
+  newBook.appendChild(trash);
+  if (book.read) {
+    newBookRead.textContent += "Read";
+  } else {
+    newBookRead.textContent += "Not read";
+  }
+  newBook.appendChild(info);
   newBook.appendChild(newBookRead);
 
   result.appendChild(newBook);
+
+  trash.addEventListener("click", function () {
+    let index = myLibrary.indexOf(book);
+    myLibrary.splice(index, 1);
+    createAll();
+  });
+
+  newBookRead.addEventListener("click", function () {
+    let i = myLibrary.indexOf(book);
+    if (book.read) {
+      book.read = false;
+      newBookRead.textContent = "Not Read";
+    } else {
+      book.read = true;
+      newBookRead.textContent = "Read";
+    }
+  });
 }
