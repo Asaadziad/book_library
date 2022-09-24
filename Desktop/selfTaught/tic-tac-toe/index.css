@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  background: linear-gradient(#a2b5bb, #cfd2cf) no-repeat fixed;
+}
+header {
+  padding: 32px;
+  background-color: #f5eddc;
+  border-bottom: 1px solid #cfd2cf;
+  color: #a2b5bb;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  padding: 16px;
+
+  color: #f5eddc;
+}
+footer a {
+  color: #a2b5bb;
+  text-decoration: none;
+}
